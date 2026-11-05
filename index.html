@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f6f1">
+  <title>Flip 7 Bust Calculator</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+<main class="app">
+  <header><p class="eyebrow">A TABLESIDE COMPANION</p><h1>Flip 7 <span>calculator</span></h1><p class="intro">Keep track of the cards. Know your next move.</p></header>
+  <section class="result" aria-live="polite" aria-atomic="true">
+    <div><p class="result-label">YOUR BUST CHANCE</p><p id="probability" class="probability">0.0%</p></div>
+    <p id="remaining" class="remaining"></p>
+  </section>
+  <section class="card-section" aria-labelledby="hand-title">
+    <div class="section-heading"><div><p class="step">01 / YOUR CARDS</p><h2 id="hand-title">My hand <span id="hand-count" class="badge">0 cards</span></h2></div><p>Tap to select or remove</p></div>
+    <div id="hand" class="grid hand-grid"></div>
+  </section>
+  <section class="card-section" aria-labelledby="other-title">
+    <div class="section-heading"><div><p class="step">02 / OBSERVED CARDS</p><h2 id="other-title">Other players</h2></div><p>Tap + or − to adjust</p></div>
+    <div id="others" class="grid other-grid"></div>
+  </section>
+  <section class="actions" aria-label="Deck actions">
+    <button id="turn" class="action primary" type="button"><strong>Turn</strong><span>Move current cards to discards</span></button>
+    <button id="reshuffle" class="action secondary" type="button"><strong>Reshuffle</strong><span>Return discarded cards to deck</span></button>
+  </section>
+</main>
+</body>
+</html>

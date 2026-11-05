@@ -1,0 +1,25 @@
+:root{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#202b28;background:#f7f6f1;font-synthesis:none}*{box-sizing:border-box}body{margin:0}.app{max-width:900px;margin:auto;padding:42px 24px 32px}header{margin-bottom:26px}.eyebrow,.step,.result-label{font-size:.7rem;font-weight:800;letter-spacing:.14em}.eyebrow,.step{color:#a06645}h1{font-size:clamp(2rem,5vw,3rem);letter-spacing:-.055em;margin:8px 0 3px;line-height:1.1}h1 span{font-weight:400;color:#6b7770}.intro{color:#6b7770;margin:8px 0}.result{background:#173e36;color:#fff;border-radius:18px;padding:24px 28px;display:flex;align-items:end;justify-content:space-between;gap:20px}.result-label{color:#a8c8b7;margin:0}.probability{font-size:clamp(3.8rem,9vw,5.5rem);line-height:1;margin:12px 0;font-weight:750;letter-spacing:-.07em}.probability.message{font-size:clamp(2rem,5vw,3.2rem);letter-spacing:-.04em}.explanation{margin:0;color:#d2e1d8;font-size:.9rem}.remaining{font-size:.82rem;color:#d2e1d8;text-align:right;white-space:nowrap;margin:0}.card-section{margin-top:32px}.section-heading{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:14px}.section-heading p{margin:0;color:#7b8580;font-size:.78rem}.section-heading .step{color:#a06645;font-size:.65rem;margin-bottom:5px}h2{font-size:1.3rem;letter-spacing:-.03em;margin:0}.badge{font-size:.72rem;letter-spacing:0;font-weight:600;color:#687970;background:#e7ece5;padding:5px 9px;border-radius:20px;vertical-align:middle}.grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}button{font:inherit;cursor:pointer}button:focus-visible{outline:3px solid #d69352;outline-offset:3px}.number{height:56px;border:1px solid #dce1d9;border-radius:9px;background:#fff;color:#273a32;font-size:1.2rem;font-weight:700}.number[aria-pressed=true]{background:#cc704a;color:white;border-color:#cc704a}.number:disabled{background:#eceee9;color:#a9b1aa;cursor:not-allowed}.counter{background:#fff;border:1px solid #dce1d9;border-radius:9px;padding:8px 4px 4px;text-align:center}.counter.has-cards{border-color:#cb8a68;background:#fff9f4}.counter-number{font-size:1.05rem;font-weight:750}.counter-controls{display:flex;align-items:center;justify-content:center;gap:2px;margin-top:4px}.counter-controls button{border:0;border-radius:5px;background:#eef1eb;color:#294b3d;font-size:1.1rem;font-weight:700;min-width:32px;height:36px}.counter-controls button:disabled{color:#c8cec8;background:#f7f8f5;cursor:not-allowed}.count{min-width:18px;font-size:.85rem;font-weight:700}.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:32px}.action{text-align:left;border-radius:10px;padding:15px 18px;min-height:70px}.action strong,.action span{display:block}.action span{font-size:.75rem;margin-top:4px}.primary{background:#244f42;color:white;border:1px solid #244f42}.primary span{color:#c9ddd1}.secondary{background:transparent;color:#374a40;border:1px solid #aab9ab}.secondary span{color:#728076}.action:disabled{opacity:.45;cursor:not-allowed}footer{font-size:.75rem;color:#87918a;margin-top:24px;text-align:center}@media(min-width:601px) and (max-width:780px){.grid{grid-template-columns:repeat(5,minmax(0,1fr))}}@media(max-width:600px){.app{padding:28px 16px}.result{align-items:start;flex-direction:column;gap:16px;padding:22px}.remaining{text-align:left;white-space:normal}.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.section-heading{align-items:start}.section-heading>p{text-align:right;max-width:110px}.actions{grid-template-columns:1fr 1fr}.action{padding:12px}.action span{line-height:1.3}}
+
+/* Portrait phones: keep the hand compact while leaving room for touch controls. */
+@media (max-width: 600px) {
+  .app { padding: 20px 16px max(24px, env(safe-area-inset-bottom)); }
+  header { margin-bottom: 16px; }
+  h1 { font-size: 2rem; }
+  .intro { font-size: .85rem; margin: 5px 0 0; }
+  .result { padding: 18px; gap: 8px; border-radius: 14px; }
+  .probability { font-size: 3.5rem; margin: 8px 0; }
+  .remaining { font-size: .8rem; }
+  .card-section { margin-top: 22px; }
+  .section-heading { margin-bottom: 10px; }
+  .hand-grid { grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
+  .number { height: 48px; font-size: 1rem; }
+  .other-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .counter { padding: 5px 3px 3px; }
+  .counter-controls { margin-top: 2px; }
+  .counter-controls button { min-width: 44px; height: 44px; }
+  .actions { margin-top: 22px; }
+}
+@media (max-width: 350px) {
+  .hand-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .other-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

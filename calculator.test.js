@@ -1,0 +1,13 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { INITIAL_COPIES, createState, toggleHand, changeOther, turn, reshuffle, calculate } from './calculator.js';
+
+test('initial distribution has 79 cards', () => { assert.deepEqual(INITIAL_COPIES, [1,1,2,3,4,5,6,7,8,9,10,11,12]); assert.equal(calculate(createState()).remainingCards, 79); });
+test('empty hand and a single 1 have zero bust chance', () => { assert.equal(calculate(createState()).bustProbability, 0); assert.equal(calculate(toggleHand(createState(), 1)).bustProbability, 0); });
+test('two bust cards among 50 gives four percent', () => { let s = toggleHand(createState(), 3); for (let i=0;i<12;i++) s=changeOther(s,12,1); for (let i=0;i<11;i++) s=changeOther(s,11,1); for (let i=0;i<5;i++) s=changeOther(s,10,1); const r=calculate(s); assert.equal(r.remainingCards,50); assert.equal(r.bustCards,2); assert.equal(r.bustProbability,4); });
+test('other cards reduce deck and matching cards reduce bust cards', () => { let s=toggleHand(createState(),3); s=changeOther(s,3,1); s=changeOther(s,4,1); const r=calculate(s); assert.equal(r.remainingCards,76); assert.equal(r.bustCards,1); });
+test('turn moves active cards to history and clears hands', () => { let s=changeOther(toggleHand(createState(),3),3,1); s=turn(s); assert.equal(s.completedTurnCounts[3],2); assert.ok(s.myHand.every(x=>!x)); assert.ok(s.otherPlayersCounts.every(x=>x===0)); assert.equal(calculate(s).remainingCards,77); });
+test('reshuffle clears history but preserves current observations', () => { let s=turn(toggleHand(createState(),3)); s=changeOther(toggleHand(s,4),3,1); s=reshuffle(s); assert.ok(s.completedTurnCounts.every(x=>x===0)); assert.equal(s.myHand[4],true); assert.equal(s.otherPlayersCounts[3],1); assert.equal(calculate(s).remainingCards,77); });
+test('counts cannot exceed distribution or become negative', () => { let s=createState(); s=changeOther(s,0,-1); assert.equal(s.otherPlayersCounts[0],0); s=changeOther(s,0,1); s=changeOther(s,0,1); s=toggleHand(s,0); assert.equal(s.otherPlayersCounts[0],1); assert.equal(s.myHand[0],false); s=changeOther(s,0,-1); s=toggleHand(s,0); s=changeOther(s,0,1); assert.equal(s.otherPlayersCounts[0],0); assert.ok(calculate(s).remainingCopies.every(x=>x>=0)); });
+test('seven distinct cards complete the round', () => { let s=createState(); for(let n=0;n<7;n++) s=toggleHand(s,n); assert.equal(calculate(s).roundComplete,true); });
+test('empty deck has no division by zero', () => { let s=createState(); for(let n=0;n<13;n++) for(let i=0;i<INITIAL_COPIES[n];i++) s=changeOther(s,n,1); const r=calculate(s); assert.equal(r.remainingCards,0); assert.equal(r.bustProbability,null); });
